@@ -1,5 +1,6 @@
 package repository;
 
+import datastructures.arvorebinaria.ArvoreBinaria;
 import datastructures.colecao.IColecao;
 import datastructures.lista.ListaEncadeada;
 import domain.Contato;
@@ -13,9 +14,19 @@ public class ContatoRepository implements IContatoRepository {
     private final IColecao<Contato> listaPorNome;
     private final IColecao<Contato> listaPorTelefone;
 
+    public ContatoRepository(int tipo) {
+        if (tipo == 3) {
+            this.listaPorNome = new ArvoreBinaria<Contato>(new ContatoComparatorPorNome());
+            this.listaPorTelefone = new ArvoreBinaria<Contato>(new ContatoComparatorPorTelefone());
+        } else {
+            boolean ordenada = (tipo == 2);
+            this.listaPorNome = new ListaEncadeada<Contato>(ordenada, new ContatoComparatorPorNome());
+            this.listaPorTelefone = new ListaEncadeada<Contato>(ordenada, new ContatoComparatorPorTelefone());
+        }
+    }
+
     public ContatoRepository(boolean ordenada) {
-        this.listaPorNome = new ListaEncadeada<Contato>(ordenada, new ContatoComparatorPorNome());
-        this.listaPorTelefone = new ListaEncadeada<Contato>(ordenada, new ContatoComparatorPorTelefone());
+        this(ordenada ? 2 : 1);
     }
 
     @Override

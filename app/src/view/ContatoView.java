@@ -22,7 +22,7 @@ public class ContatoView {
 
         while (executando) {
             System.out.println("\n=== MENU PRINCIPAL ===");
-            System.out.println("1. Carregar dados de arquivo (padrão: dados/arquivo1000.txt)");
+            System.out.println("1. Carregar dados de arquivo");
             System.out.println("2. Adicionar contato");
             System.out.println("3. Pesquisar contato por nome");
             System.out.println("4. Pesquisar contato por telefone");
@@ -143,13 +143,14 @@ public class ContatoView {
 
     private void adicionarArquivo() {
         System.out.println("== CARREGAR DADOS DE ARQUIVO ==");
-        System.out.print("Digite o caminho do arquivo (Enter para padrão 'dados/arquivo1000.txt'): ");
+        System.out.print("Digite o caminho do arquivo (Enter para padrão 'dados/arquivo.txt'): ");
         String caminho = scanner.nextLine().trim();
 
         if (caminho.isEmpty()) {
-            caminho = "dados/arquivo1000.txt";
+            caminho = "dados/arquivo.txt";
         }
 
+        // essa logica aqui de abrir o caminho foi a IA.
         if (!new java.io.File(caminho).exists()) {
             if (new java.io.File("dados/" + caminho).exists()) {
                 caminho = "dados/" + caminho;
@@ -207,11 +208,22 @@ public class ContatoView {
 
 
     private void setup() {
-        System.out.println("Você deseja usar uma lista ORDENADA? (S/N)");
-        boolean ordenada = scanner.nextLine().trim().equalsIgnoreCase("S");
+        System.out.println("Qual estrutura de dados você deseja usar?");
+        System.out.println("1. Lista NÃO ordenada");
+        System.out.println("2. Lista ORDENADA");
+        System.out.println("3. Árvore Binária");
+        System.out.print("Escolha uma opção (1-3) [padrão: 1]: ");
+
+        String opcao = scanner.nextLine().trim();
+        int tipo = 1;
+        if (opcao.equals("2")) {
+            tipo = 2;
+        } else if (opcao.equals("3")) {
+            tipo = 3;
+        }
 
         // ODEIO ter que iniciar o repository aqui... mas enfim...
-        contatoService = new ContatoService(new ContatoRepository(ordenada));
+        contatoService = new ContatoService(new ContatoRepository(tipo));
     }
 
     private void exibirMensagemErroERetornar(String mensagem) {

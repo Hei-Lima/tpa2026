@@ -1,6 +1,6 @@
 package datastructures.no;
 
-public class No<T> {
+public class No<T> implements INo<T>{
     private T valor;
     private No<T> prox;
 
