@@ -14,6 +14,10 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T> {
         NoBinario<T> f = r.getDir();
         r.setDir(f.getEsq());
         f.setEsq(r);
+
+        // Atualização das alturas conforme Slide 12
+        r.atualizarAltura();
+        f.atualizarAltura();
         return f;
     }
 
@@ -21,6 +25,10 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T> {
         NoBinario<T> f = r.getEsq();
         r.setEsq(f.getDir());
         f.setDir(r);
+
+        // Atualização das alturas conforme Slide 17
+        r.atualizarAltura();
+        f.atualizarAltura();
         return f;
     }
 
@@ -43,6 +51,8 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T> {
             return null;
         }
 
+        r.atualizarAltura();
+
         if (r.fatorBalanceamento() > 1) {
             if (r.getDir() != null && r.getDir().fatorBalanceamento() >= 0) {
                 r = this.rotacaoEsquerda(r);
@@ -57,6 +67,14 @@ public class ArvoreAVL<T> extends ArvoreBinaria<T> {
             }
         }
         return r;
+    }
+
+    @Override
+    public int altura() {
+        if (getRaiz() == null) {
+            return 0;
+        }
+        return getRaiz().getAltura();
     }
 
     @Override
