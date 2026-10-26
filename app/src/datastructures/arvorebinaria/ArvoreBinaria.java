@@ -92,7 +92,7 @@ public class ArvoreBinaria<T> extends ArvoreBinariaBase<T>{
         return res;
     }
 
-    private int quant;
+    protected int quant;
 
     public boolean adicionar(T novoValor) {
         if (raiz == null) {

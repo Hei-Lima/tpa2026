@@ -212,7 +212,8 @@ public class ContatoView {
         System.out.println("1. Lista NÃO ordenada");
         System.out.println("2. Lista ORDENADA");
         System.out.println("3. Árvore Binária");
-        System.out.print("Escolha uma opção (1-3) [padrão: 1]: ");
+        System.out.println("4. Árvore AVL");
+        System.out.print("Escolha uma opção (1-4) [padrão: 1]: ");
 
         String opcao = scanner.nextLine().trim();
         int tipo = 1;
@@ -220,6 +221,8 @@ public class ContatoView {
             tipo = 2;
         } else if (opcao.equals("3")) {
             tipo = 3;
+        } else if (opcao.equals("4")) {
+            tipo = 4;
         }
 
         // ODEIO ter que iniciar o repository aqui... mas enfim...

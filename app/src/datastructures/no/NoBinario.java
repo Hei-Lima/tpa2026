@@ -34,4 +34,26 @@ public class NoBinario<T> implements INo<T>{
     public void setDir(NoBinario no) {
         this.dir = no;
     }
+
+    public int obterAltura() {
+        return obterAltura(this);
+    }
+
+    private int obterAltura(NoBinario<T> r) {
+        if (r == null) {
+            return -1;
+        } else {
+            int hd = obterAltura(r.getDir());
+            int he = obterAltura(r.getEsq());
+            if (hd > he) {
+                return hd + 1;
+            } else {
+                return he + 1;
+            }
+        }
+    }
+
+    public int fatorBalanceamento() {
+        return obterAltura(this.dir) - obterAltura(this.esq);
+    }
 }
